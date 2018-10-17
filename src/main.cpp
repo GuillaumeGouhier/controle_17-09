@@ -24,3 +24,23 @@ int main()
 		}
 	}
 }
+
+int erase_given_num(float num, num_list, bool every_num){
+
+	for (int i = 0; i < num_list.size(); ++i)
+	{
+		if(every_num){
+			if(num_list[i] == num){
+				num_list.erase(num_list.begin()+i);
+			}
+			return 0;
+		}
+		else{
+			if(num_list[i] == num){
+				num_list.erase(num_list.begin()+i);
+			}
+		}
+	}
+	return 0;
+}
+
