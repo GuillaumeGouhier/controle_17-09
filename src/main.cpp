@@ -3,28 +3,50 @@
 #include <algorithm>
 #include <string>
 #include <ctype.h>
-
+#include <fstream>
+#include <cstring>
 using namespace std;
 
 
-int main()
-{
+int main(){
+	//Initialisation
 	vector<int> num_list;
-	string tmp_input = "0";
+	ifstream last_save;
+	last_save.open("list.txt");
+	if (last_save.is_open())
+	{
+		
+		char *line;
+		while(last_save.getline(line)){
+
+			num_list.push_back(atof(line));
+		}
+		
+	}
+
 	int choice;
 	float tmp_num;
+
+//Menu
 	while(true){
-		
+
+		ofstream list;
+		list.open ("list.txt");
 		cout<<"Voici la liste en cours: "<<endl;
 		for(int i = 0; i < num_list.size(); i++){
-					cout<<num_list[i]<<endl;
-				}
+			cout<<num_list[i]<<endl;
+			
+			list << num_list[i]<<"\n";
+		}
+		list.close();
+
 		cout<<"Que souhaitez vous faire? (1 pour ajouter un nombre, 2 pour en supprimer un, 3 pour supprimer toutes les occurences de ce nombre et 4 pour quitter"<<endl;
 		cin>>choice;
 
+//Execution en fonction du choix utilisateur
 		switch(choice){
 			case 1:
-				cout<<"Quel est votre nombre?"<<endl;
+				cout<<"Quel nombre doit on ajouter?"<<endl;
 				cin>>tmp_num;
 				num_list.push_back(tmp_num);
 				sort(num_list.begin(), num_list.end());
